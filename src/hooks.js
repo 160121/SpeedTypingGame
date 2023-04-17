@@ -1,13 +1,12 @@
-import logo from './logo.svg';
-import './App.css';
-import {useState,useEffect,useRef} from 'react';
-function App() {  
-       const timelimit = 5;
+import {useState,useEffect,useRef} from "";
+function usegame(){
+       
        const [text, settext] = useState(' ');
        const [time, settime] = useState(timelimit);
        const [timerunning, settimerunning] = useState(false);
        const [wordcount, setwordcount] = useState(0);
        const inputref = useRef(null);
+       const timelimit = 5;
        function handleclick(e) {
          const { value } = e.target;
          settext(value);
@@ -33,17 +32,7 @@ function App() {
            settimerunning(false);
            setwordcount(calculateword(text));
          }
-       }, [time, timerunning]);
-  return(
-    <div>
-      <h1>How fast can you type???</h1>
-      <textarea rows="15" onChange={handleclick} ref={inputref} value={text} disabled={!timerunning}></textarea>
-      <h4>remaining time:{time}</h4>
-      <button onClick={startgame} disabled={timerunning}>start</button>
-      <h1>Number of words:{wordcount}</h1>
-    </div>
-  )
-   
+       }, [time, timerunning])
+       return{handleclick,startgame,calculateword,timerunning,time,wordcount,text,inputref}
 }
-
-export default App;
+export default usegame
